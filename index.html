@@ -1,2 +1,16 @@
-Test
-<script defer data-domain="rwask.github.io" src="https://plausible.io/js/script.js"></script>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Plausible Test Site</title>
+    <script defer data-domain="rwask.github.io" src="https://plausible.io/js/script.js"></script>
+  </head>
+  <body>
+    <h1>Test Page for Plausible.io</h1>
+    <p>This page should trigger a pageview event in Plausible when loaded.</p>
+    <button onclick="plausible('Custom Event'); alert('Custom event fired!')">
+      Fire Custom Event
+    </button>
+  </body>
+</html>
