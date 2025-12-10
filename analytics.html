@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SolarWinds Demo - Analytics</title>
+    <script>
+      (function(apiKey){
+          (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+          v=['initialize','identify','updateOptions','pageLoad','track','trackAgent'];for(w=0,x=v.length;w<x;++w)(function(m){
+              o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+              y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
+              z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+      })('ce863e40-54e5-48e8-8eee-1614096d5b42');
+    </script>
+    <script src="shared.js"></script>
+    <link rel="stylesheet" href="shared-styles.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🚀 SolarWinds Monitoring Platform</h1>
+        <div class="user-info">
+          <strong id="current-user">Loading...</strong>
+          <span id="current-account">...</span>
+        </div>
+      </div>
+      <div class="nav">
+        <a href="index.html" data-pendo="nav-dashboard">📊 Dashboard</a>
+        <a href="reports.html" data-pendo="nav-reports">📈 Reports</a>
+        <a href="alerts.html" data-pendo="nav-alerts">🔔 Alerts</a>
+        <a href="analytics.html" class="active" data-pendo="nav-analytics">📉 Analytics</a>
+        <a href="settings.html" data-pendo="nav-settings">⚙️ Settings</a>
+      </div>
+      <div class="content">
+        <h2 style="margin-bottom: 20px; color: #003366;">📉 Analytics Dashboard</h2>
+        <div class="dashboard-grid">
+          <div class="card" onclick="trackFeature('view-trends')" data-pendo="analytics-trends">
+            <div class="card-icon">📊</div>
+            <h3>Trend Analysis</h3>
+            <p>Identify patterns and trends in system metrics</p>
+          </div>
+          <div class="card" onclick="trackFeature('view-heatmap')" data-pendo="analytics-heatmap">
+            <div class="card-icon">🗺️</div>
+            <h3>Performance Heatmap</h3>
+            <p>Visualize performance hotspots across infrastructure</p>
+          </div>
+          <div class="card" onclick="trackFeature('view-forecasts')" data-pendo="analytics-forecast">
+            <div class="card-icon">🔮</div>
+            <h3>Predictive Forecasts</h3>
+            <p>AI-powered predictions for capacity and performance</p>
+          </div>
+          <div class="card" onclick="trackFeature('custom-query')" data-pendo="analytics-query">
+            <div class="card-icon">🔍</div>
+            <h3>Custom Queries</h3>
+            <p>Run advanced analytics queries on your data</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

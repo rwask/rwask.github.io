@@ -3,37 +3,340 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Plausible Test Site</title>
+    <title>SolarWinds Demo - Dashboard</title>
 
-    <!-- Privacy-friendly analytics by Plausible -->
-    <script async src="https://plausible.io/js/pa-cY4ul54lXRuTJ_SUFwX47.js"></script>
+    <!-- Pendo Analytics -->
     <script>
-      window.plausible = window.plausible || function () {
-        (plausible.q = plausible.q || []).push(arguments);
-      };
-      plausible.init = plausible.init || function (i) {
-        plausible.o = i || {};
-      };
-      plausible.init();
+      (function(apiKey){
+          (function(p,e,n,d,o){var v,w,x,y,z;o=p[d]=p[d]||{};o._q=o._q||[];
+          v=['initialize','identify','updateOptions','pageLoad','track','trackAgent'];for(w=0,x=v.length;w<x;++w)(function(m){
+              o[m]=o[m]||function(){o._q[m===v[0]?'unshift':'push']([m].concat([].slice.call(arguments,0)));};})(v[w]);
+              y=e.createElement(n);y.async=!0;y.src='https://cdn.pendo.io/agent/static/'+apiKey+'/pendo.js';
+              z=e.getElementsByTagName(n)[0];z.parentNode.insertBefore(y,z);})(window,document,'script','pendo');
+      })('ce863e40-54e5-48e8-8eee-1614096d5b42');
     </script>
+
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        padding: 20px;
+      }
+      .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        overflow: hidden;
+      }
+      .header {
+        background: linear-gradient(135deg, #003366 0%, #0066cc 100%);
+        color: white;
+        padding: 30px 40px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .header h1 { font-size: 28px; font-weight: 600; }
+      .user-info {
+        background: rgba(255,255,255,0.15);
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+      .user-info strong { display: block; margin-bottom: 4px; }
+      .nav {
+        background: #f8f9fa;
+        padding: 0;
+        border-bottom: 2px solid #e0e0e0;
+        display: flex;
+      }
+      .nav a {
+        padding: 18px 30px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        border-bottom: 3px solid transparent;
+        transition: all 0.3s;
+      }
+      .nav a:hover, .nav a.active {
+        background: white;
+        border-bottom-color: #0066cc;
+        color: #0066cc;
+      }
+      .nav a.active { font-weight: 600; }
+      .content {
+        padding: 40px;
+      }
+      .controls {
+        background: #e3f2fd;
+        border-left: 4px solid #2196f3;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+      }
+      .controls h3 { margin-bottom: 15px; color: #1976d2; }
+      .controls button {
+        margin-right: 10px;
+        margin-bottom: 10px;
+        padding: 10px 20px;
+        background: #2196f3;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: all 0.3s;
+      }
+      .controls button:hover {
+        background: #1976d2;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(33, 150, 243, 0.4);
+      }
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 30px;
+      }
+      .card {
+        background: white;
+        border: 2px solid #e0e0e0;
+        border-radius: 12px;
+        padding: 25px;
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+      .card:hover {
+        border-color: #0066cc;
+        box-shadow: 0 8px 24px rgba(0,102,204,0.15);
+        transform: translateY(-4px);
+      }
+      .card-icon {
+        font-size: 36px;
+        margin-bottom: 15px;
+      }
+      .card h3 {
+        color: #003366;
+        margin-bottom: 10px;
+        font-size: 20px;
+      }
+      .card p {
+        color: #666;
+        line-height: 1.6;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+      }
+      .stat-box {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 25px;
+        border-radius: 12px;
+        text-align: center;
+      }
+      .stat-box h4 {
+        font-size: 14px;
+        font-weight: 500;
+        opacity: 0.9;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+      .stat-box .number {
+        font-size: 36px;
+        font-weight: 700;
+        margin-bottom: 5px;
+      }
+    </style>
   </head>
 
-  <body style="font-family: system-ui, -apple-system, sans-serif; padding: 2rem;">
-    <h1>Plausible Test Page</h1>
-    <p>If everything’s wired correctly, loading this page will register a pageview in Plausible.</p>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>🚀 SolarWinds Monitoring Platform</h1>
+        <div class="user-info">
+          <strong id="current-user">Sarah Chen</strong>
+          <span id="current-account">SolarWinds Production</span>
+        </div>
+      </div>
 
-    <h2>Custom Events</h2>
-    <button onclick="plausible('Signup'); alert('Signup fired')">Fire “Signup”</button>
-    <button onclick="plausible('Add to Cart'); alert('Add to Cart fired')">Fire “Add to Cart”</button>
-    <button onclick="plausible('Checkout Started'); alert('Checkout Started fired')">Fire “Checkout Started”</button>
-    <button onclick="plausible('Purchase', {props:{value: Math.floor(Math.random()*100)+1}}); alert('Purchase fired')">Fire “Purchase”</button>
+      <div class="nav">
+        <a href="index.html" class="active" data-pendo="nav-dashboard">📊 Dashboard</a>
+        <a href="reports.html" data-pendo="nav-reports">📈 Reports</a>
+        <a href="alerts.html" data-pendo="nav-alerts">🔔 Alerts</a>
+        <a href="analytics.html" data-pendo="nav-analytics">📉 Analytics</a>
+        <a href="settings.html" data-pendo="nav-settings">⚙️ Settings</a>
+      </div>
 
-    <h2>Links</h2>
-    <ul>
-      <li><a href="pricing.html">Pricing</a></li>
-      <li><a href="docs.html">Docs</a></li>
-      <li><a href="https://airbyte.com" target="_blank" rel="noopener">Visit Airbyte (outbound)</a></li>
-      <li><a href="files/test.pdf" download>Download a test PDF</a></li>
-    </ul>
+      <div class="content">
+        <div class="controls">
+          <h3>🎭 Switch User/Account (Generates Different Visitor Data)</h3>
+          <button onclick="switchUser()" data-pendo="btn-switch-user">Switch User</button>
+          <button onclick="switchAccount()" data-pendo="btn-switch-account">Switch Account</button>
+          <button onclick="trackCustomEvent('DemoAction')" data-pendo="btn-demo-action">Fire Demo Event</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat-box">
+            <h4>Active Servers</h4>
+            <div class="number">247</div>
+            <span>Monitored</span>
+          </div>
+          <div class="stat-box">
+            <h4>Alerts Today</h4>
+            <div class="number">12</div>
+            <span>Critical: 3</span>
+          </div>
+          <div class="stat-box">
+            <h4>Uptime</h4>
+            <div class="number">99.8%</div>
+            <span>Last 30 days</span>
+          </div>
+          <div class="stat-box">
+            <h4>Data Processed</h4>
+            <div class="number">2.4TB</div>
+            <span>This month</span>
+          </div>
+        </div>
+
+        <h2 style="margin-bottom: 20px; color: #003366;">Quick Actions</h2>
+        <div class="dashboard-grid">
+          <div class="card" onclick="trackFeature('export-data')" data-pendo="card-export">
+            <div class="card-icon">📤</div>
+            <h3>Export Data</h3>
+            <p>Export monitoring data to CSV, JSON, or XML formats for external analysis</p>
+          </div>
+
+          <div class="card" onclick="trackFeature('create-report')" data-pendo="card-report">
+            <div class="card-icon">📋</div>
+            <h3>Generate Report</h3>
+            <p>Create custom reports from your infrastructure metrics and logs</p>
+          </div>
+
+          <div class="card" onclick="trackFeature('configure-alerts')" data-pendo="card-alerts">
+            <div class="card-icon">⚡</div>
+            <h3>Configure Alerts</h3>
+            <p>Set up monitoring alerts, notification rules, and escalation policies</p>
+          </div>
+
+          <div class="card" onclick="trackFeature('view-analytics')" data-pendo="card-analytics">
+            <div class="card-icon">📊</div>
+            <h3>View Analytics</h3>
+            <p>Analyze system performance, trends, and capacity planning metrics</p>
+          </div>
+
+          <div class="card" onclick="trackFeature('manage-integrations')" data-pendo="card-integrations">
+            <div class="card-icon">🔌</div>
+            <h3>Manage Integrations</h3>
+            <p>Connect to Slack, PagerDuty, ServiceNow and other third-party tools</p>
+          </div>
+
+          <div class="card" onclick="trackFeature('server-health')" data-pendo="card-health">
+            <div class="card-icon">💚</div>
+            <h3>Server Health</h3>
+            <p>Real-time health checks and performance monitoring for all servers</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // SolarWinds Demo Data - 11 accounts & 13 visitors
+      const accounts = [
+        { id: 'acc-sw-prod-001', name: 'SolarWinds Production', plan: 'Enterprise', mrr: 50000 },
+        { id: 'acc-sw-staging-001', name: 'SolarWinds Staging', plan: 'Professional', mrr: 25000 },
+        { id: 'acc-sw-dev-001', name: 'SolarWinds Development', plan: 'Professional', mrr: 25000 },
+        { id: 'acc-sw-test-001', name: 'SolarWinds Testing', plan: 'Professional', mrr: 15000 },
+        { id: 'acc-sw-demo-001', name: 'SolarWinds Demo', plan: 'Enterprise', mrr: 35000 },
+        { id: 'acc-sw-backup-001', name: 'SolarWinds Backup', plan: 'Professional', mrr: 20000 },
+        { id: 'acc-sw-dr-001', name: 'SolarWinds DR', plan: 'Enterprise', mrr: 45000 },
+        { id: 'acc-sw-analytics-001', name: 'SolarWinds Analytics', plan: 'Enterprise', mrr: 55000 },
+        { id: 'acc-sw-monitor-001', name: 'SolarWinds Monitoring', plan: 'Professional', mrr: 30000 },
+        { id: 'acc-sw-alerts-001', name: 'SolarWinds Alerts', plan: 'Enterprise', mrr: 40000 },
+        { id: 'acc-sw-reports-001', name: 'SolarWinds Reports', plan: 'Professional', mrr: 22000 }
+      ];
+
+      const visitors = [
+        { id: 'visitor-sc-001', name: 'Sarah Chen', email: 'sarah.chen@solarwinds.com', role: 'Admin', accountIdx: 0 },
+        { id: 'visitor-mj-001', name: 'Mike Johnson', email: 'mike.johnson@solarwinds.com', role: 'Manager', accountIdx: 0 },
+        { id: 'visitor-ed-001', name: 'Emily Davis', email: 'emily.davis@solarwinds.com', role: 'Analyst', accountIdx: 1 },
+        { id: 'visitor-jw-001', name: 'James Wilson', email: 'james.wilson@solarwinds.com', role: 'User', accountIdx: 2 },
+        { id: 'visitor-la-001', name: 'Lisa Anderson', email: 'lisa.anderson@solarwinds.com', role: 'Admin', accountIdx: 3 },
+        { id: 'visitor-dm-001', name: 'David Martinez', email: 'david.martinez@solarwinds.com', role: 'Manager', accountIdx: 4 },
+        { id: 'visitor-kt-001', name: 'Karen Taylor', email: 'karen.taylor@solarwinds.com', role: 'Analyst', accountIdx: 5 },
+        { id: 'visitor-rb-001', name: 'Robert Brown', email: 'robert.brown@solarwinds.com', role: 'User', accountIdx: 6 },
+        { id: 'visitor-jw-002', name: 'Jennifer White', email: 'jennifer.white@solarwinds.com', role: 'Admin', accountIdx: 7 },
+        { id: 'visitor-cg-001', name: 'Chris Garcia', email: 'chris.garcia@solarwinds.com', role: 'User', accountIdx: 8 },
+        { id: 'visitor-am-001', name: 'Amanda Miller', email: 'amanda.miller@solarwinds.com', role: 'Manager', accountIdx: 9 },
+        { id: 'visitor-tk-001', name: 'Tom Kim', email: 'tom.kim@solarwinds.com', role: 'Analyst', accountIdx: 10 },
+        { id: 'visitor-sp-001', name: 'Susan Park', email: 'susan.park@solarwinds.com', role: 'User', accountIdx: 10 }
+      ];
+
+      let currentVisitorIdx = 0;
+      let currentAccountIdx = 0;
+
+      function initPendo() {
+        const visitor = visitors[currentVisitorIdx];
+        const account = accounts[currentAccountIdx];
+
+        pendo.initialize({
+          visitor: {
+            id: visitor.id,
+            email: visitor.email,
+            firstName: visitor.name.split(' ')[0],
+            lastName: visitor.name.split(' ')[1],
+            role: visitor.role
+          },
+          account: {
+            id: account.id,
+            accountName: account.name,
+            payingStatus: account.plan,
+            mrr: account.mrr,
+            industry: 'Technology'
+          }
+        });
+
+        document.getElementById('current-user').textContent = visitor.name;
+        document.getElementById('current-account').textContent = account.name;
+        console.log('🔄 Pendo initialized:', visitor.name, '@', account.name);
+      }
+
+      function switchUser() {
+        currentVisitorIdx = (currentVisitorIdx + 1) % visitors.length;
+        currentAccountIdx = visitors[currentVisitorIdx].accountIdx;
+        initPendo();
+        alert('Switched to: ' + visitors[currentVisitorIdx].name);
+      }
+
+      function switchAccount() {
+        currentAccountIdx = (currentAccountIdx + 1) % accounts.length;
+        initPendo();
+        alert('Switched to account: ' + accounts[currentAccountIdx].name);
+      }
+
+      function trackFeature(featureId) {
+        pendo.track('FeatureClick', { featureId: featureId, timestamp: Date.now() });
+        console.log('📍 Tracked:', featureId);
+        alert('Feature clicked: ' + featureId);
+      }
+
+      function trackCustomEvent(eventName) {
+        pendo.track(eventName, { source: 'dashboard', timestamp: Date.now() });
+        console.log('🎯 Custom event:', eventName);
+        alert('Custom event fired: ' + eventName);
+      }
+
+      // Initialize on load
+      window.addEventListener('load', () => {
+        setTimeout(initPendo, 500);
+      });
+    </script>
   </body>
 </html>
